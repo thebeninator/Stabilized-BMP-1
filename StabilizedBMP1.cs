@@ -14,7 +14,6 @@ using GHPC.Weapons;
 [assembly: MelonInfo(typeof(StabilizedBMP1Mod), "Stabilized BMP-1", "1.0.0", "ATLAS")]
 [assembly: MelonGame("Radian Simulations LLC", "GHPC")]
 
-
 namespace StabilizedBMP1
 {
     public class StabilizedBMP1Mod : MelonMod
