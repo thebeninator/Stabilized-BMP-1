@@ -58,9 +58,11 @@ namespace StabilizedBMP1
                     stab_active.SetValue(aimables[0], true);
                     stab_mode.SetValue(aimables[0], StabilizationMode.Vector);
 
-                    aimables[3].Stabilized = true;
-                    stab_active.SetValue(aimables[3], true);
-                    stab_mode.SetValue(aimables[3], StabilizationMode.Vector);
+                    int turret_platform_idx = name == "BMP-1" ? 3 : 1;
+
+                    aimables[turret_platform_idx].Stabilized = true;
+                    stab_active.SetValue(aimables[turret_platform_idx], true);
+                    stab_mode.SetValue(aimables[turret_platform_idx], StabilizationMode.Vector);
                 }
             }
         }
