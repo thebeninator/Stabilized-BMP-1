@@ -11,15 +11,24 @@ using GHPC;
 using System.Reflection;
 using GHPC.Weapons;
 
-[assembly: MelonInfo(typeof(StabilizedBMP1Mod), "Stabilized BMP-1", "1.0.0", "ATLAS")]
+[assembly: MelonInfo(typeof(StabilizedBMP1Mod), "Stabilized BMP-1", "1.1.0", "ATLAS")]
 [assembly: MelonGame("Radian Simulations LLC", "GHPC")]
 
 namespace StabilizedBMP1
 {
     public class StabilizedBMP1Mod : MelonMod
     {
+        public static MelonPreferences_Category cfg;
+        public static MelonPreferences_Entry<bool> stab_konkurs;
+
         private GameObject[] vic_gos;
         private string[] invalid_scenes = new string[] { "MainMenu2_Scene", "LOADER_MENU", "LOADER_INITIAL", "t64_menu" };
+
+        public override void OnInitializeMelon() { 
+            cfg = MelonPreferences.CreateCategory("Stabilized-BMP-1");
+            stab_konkurs = cfg.CreateEntry("BMP-1P Konkurs Stab", false);
+            stab_konkurs.Description = "Gives the Konkurs on the BMP-1P a stabilizer";    
+         }
 
         public override async void OnSceneWasInitialized(int buildIndex, string sceneName)
         {
@@ -63,6 +72,21 @@ namespace StabilizedBMP1
                     aimables[turret_platform_idx].Stabilized = true;
                     stab_active.SetValue(aimables[turret_platform_idx], true);
                     stab_mode.SetValue(aimables[turret_platform_idx], StabilizationMode.Vector);
+
+
+                    if (stab_konkurs.Value && name == "BMP-1P") {
+                        WeaponSystemInfo atgm = weapons_manager.Weapons[1];
+                        stab_FCS_active.SetValue(atgm.FCS, true);
+                        atgm.FCS.CurrentStabMode = StabilizationMode.Vector;
+
+                        aimables[2].Stabilized = true;
+                        stab_active.SetValue(aimables[2], true);
+                        stab_mode.SetValue(aimables[2], StabilizationMode.Vector);
+
+                        aimables[3].Stabilized = true;
+                        stab_active.SetValue(aimables[3], true);
+                        stab_mode.SetValue(aimables[3], StabilizationMode.Vector);
+                    }
                 }
             }
         }
