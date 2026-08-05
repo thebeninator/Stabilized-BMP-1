@@ -941,7 +941,7 @@ UnderdogsDebug.LogMCLOS("[BMP-1 MCLOS] Player lost missile control, restoring mi
 
             if (hasMclosAmmo)
             {
-                bool applyNow = hasMclosAmmo && BMP1MCLOSAmmo.MclosInputTuning.ShouldApplyNow(MissileCameraActive.IsActive);
+                bool applyNow = BMP1MCLOSAmmo.MclosInputTuning.ShouldApplyNow(MissileCameraActive.IsActive);
                 BMP1MCLOSAmmo.MclosInputTuning.ApplyDynamicTurnSpeed(ammo, horizontal, vertical, applyNow);
                 horizontal = BMP1MCLOSAmmo.MclosInputTuning.ProcessAxis(horizontal, applyNow);
                 vertical = BMP1MCLOSAmmo.MclosInputTuning.ProcessAxis(vertical, applyNow);
